@@ -1,0 +1,14 @@
+{
+	"mongo" :{
+		"host" : "localhost",
+		"database" : "indentation_war"
+	}
+}
+
+
+
+
+
+
+
+

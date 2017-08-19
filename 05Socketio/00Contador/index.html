@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <title>Contador de conexiones con socket.io</title>
+</head>
+
+<body>
+  <h1>
+	Comunicacion bidereccional con socketio
+</h1>
+  <p id="hello"></p>
+  <p>Numero de conexiones activas: <b id="conexions"></b></p>
+  <!--cuando se usa socket io del lado del servidor, la libreria automaticamente carga un archivo socket.io del lado del cliente
+  ese es el archivo al que se accede con todas las funcionalidades del socket.io-->
+  <script src="./socket.io/socket.io.js"></script>
+  <script>
+  	(function (doc,io) {
+  		'use strict';
+  		var io=io();
+  		io.on('hello', function(data){
+  			doc.querySelector('#hello').innerHTML=data.message;
+        //el cliente tambien puede emitir eventos
+        io.emit('otroevento',{name: 'Zoilo',Alias: 'Arepa'})
+  		})
+      io.on('connect users', function(data){
+        console.log('Actualizando desde el servidor. Hay '+ data.numbers+' conexiones activas');
+        doc.querySelector('#conexions').innerHTML=data.numbers
+      })
+      io.on('disconnectusers', function(data){
+        console.log('Se desconectó gente, ahora hay '+ data.numbers+' conexiones activas');
+        doc.querySelector('#conexions').innerHTML=data.numbers
+      })
+  	})(document,io);
+  </script>
+</body>
+
+</html>

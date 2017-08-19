@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	div.error
+		h1 Error N° #{error.status}:
+		h2= error.statusText
+		a.buttom.show(href="/") Inicio
+		div.item
+			//- stack es un propiedad del objeto Error, que muestra el stack de errores
+			pre #{error.stack}
+		img(src="indentation-war.png")

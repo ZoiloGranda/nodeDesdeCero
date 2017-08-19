@@ -1,0 +1,133 @@
+//este mixin es para las url de la barra de navegacion
+mixin menu(url,name)
+    li #[a(href=`${url}`) #{name}]
+
+//este es para cargar imagenes webp en los navegadores compatibles
+//el navegador si no es compatible con webp,automaticamente va a cargar la imagen en formato png, jpg o jpeg
+mixin pic(name, ext)
+    picture
+        source(srcset=`img/webp/${name}.webp`, type="image/webp")
+        img(src=`img/${name}.${ext}`)
+
+//para embeber videos de youtube
+mixin youtube(id)
+    iframe.youtube(src=`https://www.youtube.com/embed/${id}`, frameborder="0", allowfullscreen)
+
+doctype html
+html(lang="es")
+head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="shortcut icon", type="image/png", href="img/favicon.png")
+    //para cargar todos los archivos css se usa el each que los va ciclando y creando la etiqueta link
+    //este comentario build:css es para que la libreria useref apunte todos los links a ese archivo,
+    //porque despues de que se unan todas la librerias css en un solo archivo, las referencias van a quedar
+    //apuntando a archivos que no estan optimizados para el proyecto
+    //build:css css/estilos.min.css
+    each css in files.CSS
+        link(rel="stylesheet", href=`../${css}`)
+    //endbuild
+
+body
+    header.container-full.header.center
+        nav.container.nav
+            ul.item
+                //asi se aplica el mixin
+                +menu('#maraton','Maraton')
+                +menu('#mito','Mito')
+                +menu('#olimpico','Olimpico')
+                li
+                    +pic('logo-maraton', 'png')
+                +menu('#mayores','Mayores')
+                +menu('#top-ten','Top Ten')
+                +menu('#inspirate','Inspirate')
+    section#maraton.container.section
+        h1.title.center.animated.wow.zoomIn= title
+        article.item.ph12.lg8.mauto.animated.wow.fadeInRightBig
+            p
+            |Un maratón es una carrera de larga distancia que consiste en correr una distancia de 42 195 metros
+            |#[b (42 km 195 m)]. Forma parte del programa de atletismo en los Juegos Olímpicos desde Atenas 1896,
+            |en la categoría masculina, y desde Los Ángeles 1984, en la categoría femenina.
+            |Su origen se encuentra en el mito de la gesta del soldado griego #[b Filípides], quien en el año 490 a. C.
+            |habría muerto de fatiga tras haber corrido unos 37 km desde Maratón hasta Atenas para anunciar la victoria
+            |sobre el ejército persa. En realidad Filípides recorrió el camino desde Atenas hasta Esparta para pedir
+            |refuerzos, lo que serían unos 213 kilómetros. Aun así, el mito ganó mucha popularidad sobre lo que realmente sucedió.
+            +pic('maraton-intro','jpg')
+    section#mito.container.section
+        h2.title.center.animated.wow.zoomIn El Mito Griego
+        article.item.ph12.lg8.mauto.animated.wow.fadeInLeftBig
+            p
+            |asdasd adasdasda asdasdaddsa asdasdsadsadasdsadsa asdasdsadasdsasd #[b sdfsdfdsfsdfs]
+            |asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            +pic('maraton-atenas','jpg')
+            |asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            +pic('filipides','jpg')
+            |asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            +pic('atenas-sparta','jpg')
+    section#olimpico.container.section
+        h1.title.center.animated.wow.zoomIn Maraton Olimpico
+        article.item.ph12.lg8.mauto.animated.wow.fadeInRightBig
+            +pic('aros-olimpicos','jpg')
+            p
+            | asdasd adasdasda asdasdaddsa asdasdsadsadasdsadsa asdasdsadasdsasd #[b sdfsdfdsfsdfs]
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            +pic('maraton-londres','jpg')
+            p
+            | asdasd adasdasda asdasdaddsa asdasdsadsadasdsadsa asdasdsadasdsasd #[b sdfsdfdsfsdfs]
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            +pic('keep-calm','jpg')
+    section#mayores.container.section
+        h2.title.center.animated.wow.zoomIn Maratones Mayores
+        article.item.ph12.lg8.mauto.animated.wow.fadeInLeftBig
+            p
+            | Los #[a(href="https://www.worldmarathonmajors.com/" target="_blank") World Marathon Majors]
+            | asdqwe12312eqwd dasdqewfrger erfeferferfe #[b wewewe] adawwrwetwe vdfgdfgdgtr e54645eerte sd
+            div.owl-carousel.owl-theme
+                div
+                    +pic('berlin-logo','png')
+                div
+                    +pic('boston-logo','png')
+                div
+                    +pic('chicago-logo','png')
+                div
+                    +pic('awmm-medalla','jpg')
+                div
+                    +pic('londres-logo','png')
+                div
+                    +pic('new-york-logo','png')
+                div
+                    +pic('tokyo-logo','png')
+            ul
+                li #[a(href="http://wSww.bmw-berlin-maraton.com/en", target="_blank") #[b Maraton de Berlin:]] asdasdasd
+    section#top-ten.container.section
+        h2.title.center.animated.wow.zoomIn #[i.fa.fa-trophy] Top Ten #[i.fa.fa-trophy]
+        article.item.ph12-lg8.mauto.animated.wow.fadeInRightBig
+                h3.center #[i.fa.fa-female] Femenino
+                +pic('top-ten-femenino','png')
+                h3.center #[i.fa.fa-male] Masculino
+                +pic('top-ten-masculino','png')
+                h3.center #[i.fa.fa-bolt] Dennis Kimetto El hombre mas rapido del mundo
+                +youtube('Vh2dwJ80Edo')
+    section#inspirate.container.section
+        h2.title.center.animated.wow.zoomIn Inspirate
+        article.item.ph12.lg8.mauto.animated.wow.fadeInLeftBig
+            h3.center Gente corriendo maraton
+            +youtube('7xbikKIaqmg')
+            h3.center A world transformed
+            +youtube('lOCFYBvpJ6s')
+            h3.center Maraton CDMX
+            +youtube('vjfEsyH1Y4A')
+    //para cargar todos los archivos js con un each, que va creando las etiquetas script
+    //este comentario build:js es para que la libreria useref apunte todos los scripts a ese archivo,
+    //porque despues de que se unan todas la librerias js en un solo archivo, las referencias van a quedar
+    //apuntando a archivos que no estan optimizados para el proyecto
+    //build:js js/codigos.min.js
+    each js in files.JS
+        script(src=`../${js}`)
+    //endbuild
